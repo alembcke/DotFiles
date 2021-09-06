@@ -1,0 +1,383 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+[colors]
+filemanager = #458588
+firefox = #CC241D
+google-chrome = #CC241D
+launcher = #D79921
+session = #A89984
+terminal = #98971A
+window = #A89984
+low = #CC241D
+medium = #98971A
+high = #458588
+audio-on = #D79921
+audio-off = #CC241D
+danger = #CC241D
+empty = #83A598
+
+darkred = ${xrdb:color1}
+red = ${xrdb:color9}
+darkgreen = ${xrdb:color2}
+green = ${xrdb:color10}
+darkgray = ${xrdb:color8}
+lightgray = ${xrdb:color7}
+white = ${xrdb:color15}
+darkyellow = ${xrdb:color3}
+yellow = ${xrdb:color11}
+darkblue = ${xrdb:color4}
+blue = ${xrdb:color12}
+darkmagenta = ${xrdb:color5}
+magenta = ${xrdb:color13}
+darkcyan = ${xrdb:color6}
+cyan = ${xrdb:color13}
+
+background = #282828
+background-alt = #4e4e4e
+foreground = #ebdbb2
+foreground-alt = #4e4e4e
+
+[bar/main]
+width = 100%
+height = 28
+bottom = false
+fixed-center = true
+
+module-margin-left = 0
+module-margin-right = 0
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+font-0 = "SauceCodePro Nerd Font:style=Medium:size=11;2"
+font-1 = "SauceCodePro Nerd Font:style=Bold:size=9;2"
+font-2 = "SauceCodePro Nerd Font:size=12;3"
+font-3 = "SauceCodePro Nerd Font:size=16;4"
+
+modules-left = launcher window xworkspaces terminal google-chrome filemanager
+modules-center = date
+modules-right = pulseaudio separator memory separator cpu temperature separator system-nvidia-smi separator wlan separator battery lockscreen session
+
+tray-background = ${colors.background}
+tray-position = none
+tray-maxsize = 16
+cursor-click = pointer
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+full-at = 98
+
+format-charging = <animation-charging> <label-charging>
+format-charging-padding = 1
+label-charging = %percentage%%
+label-charging-padding = 1
+
+format-discharging = <ramp-capacity> <label-discharging>
+format-discharging-padding = 1
+label-discharging = %percentage%%
+label-discharging-padding = 1
+
+format-full = <ramp-capacity> <label-full>
+format-full-padding = 1
+label-full = %percentage%%
+label-full-padding = 1
+
+ramp-capacity-0 = %{T3}%{T-}
+ramp-capacity-1 = %{T3}%{T-}
+ramp-capacity-2 = %{T3}%{T-}
+ramp-capacity-3 = %{T3}%{T-}
+ramp-capacity-4 = %{T3}%{T-}
+ramp-capacity-5 = %{T3}%{T-}
+ramp-capacity-6 = %{T3}%{T-}
+ramp-capacity-7 = %{T3}%{T-}
+ramp-capacity-8 = %{T3}%{T-}
+ramp-capacity-9 = %{T3}%{T-}
+ramp-capacity-0-foreground = ${colors.low}
+ramp-capacity-1-foreground = ${colors.low}
+ramp-capacity-2-foreground = ${colors.low}
+ramp-capacity-3-foreground = ${colors.medium}
+ramp-capacity-4-foreground = ${colors.medium}
+ramp-capacity-5-foreground = ${colors.medium}
+ramp-capacity-6-foreground = ${colors.high}
+ramp-capacity-7-foreground = ${colors.high}
+ramp-capacity-8-foreground = ${colors.high}
+ramp-capacity-9-foreground = ${colors.high}
+
+animation-charging-0 = %{T3}%{T-}
+animation-charging-1 = %{T3}%{T-}
+animation-charging-2 = %{T3}%{T-}
+animation-charging-3 = %{T3}%{T-}
+animation-charging-4 = %{T3}%{T-}
+animation-charging-5 = %{T3}%{T-}
+animation-charging-6 = %{T3}%{T-}
+animation-charging-framerate = 800
+animation-charging-0-foreground = ${colors.low}
+animation-charging-1-foreground = ${colors.low}
+animation-charging-2-foreground = ${colors.medium}
+animation-charging-3-foreground = ${colors.medium}
+animation-charging-4-foreground = ${colors.high}
+animation-charging-5-foreground = ${colors.high}
+animation-charging-6-foreground = ${colors.high}
+
+[module/cpu]
+type = internal/cpu
+interval = 1
+
+format-padding = 1
+format-prefix = CPU
+format-prefix-foreground = ${colors.foreground}
+label = " %percentage:2%%"
+label-foreground = ${colors.foreground}
+
+[module/system-nvidia-smi]
+type = custom/script
+exec = ~/.config/polybar/system-nvidia-smi.sh
+interval = 5
+
+[module/date]
+type = internal/date
+interval = 1
+
+time = " %H:%M"
+time-alt = " %a, %b %d %H:%M"
+
+format-padding = 1
+format-prefix = %{T3}%{T-}
+label = %{T2}%time%%{T-}
+format-underline = ${colors.foreground}
+;format-background = ${colors.background}
+format-foreground = ${colors.foreground}
+label-font = 3
+
+[module/filemanager]
+type = custom/script
+
+click-left = xdg-open ~/&
+exec = echo %{T4}%{T-}
+format-foreground = ${colors.filemanager}
+format-padding = 1
+
+[module/launcher]
+type = custom/script
+
+click-left = rofi -show drun
+click-right = rofi -show run
+exec = echo %{T4}%{T-}
+format-foreground = ${colors.launcher}
+format-padding = 1
+
+[module/lockscreen]
+type = custom/script
+
+click-left = i3lock-fancy
+exec = echo %{T4}%{T-}
+format-foreground = ${colors.medium}
+format-padding = 1
+
+[module/memory]
+type = internal/memory
+interval = 1
+
+format-padding = 1
+format-prefix = RAM
+format-prefix-foreground = ${colors.foreground}
+label = " %percentage_used%%"
+label-foreground = ${colors.foreground}
+
+[module/pulseaudio]
+type = internal/pulseaudio
+use-ui-max = true
+
+sink = alsa_output.pci-0000_00_1f.3.analog-stereo
+format-volume = <ramp-volume> <label-volume>
+format-volume-padding = 1
+label-volume = %percentage%%
+label-volume-foreground = ${colors.audio-on}
+label-volume-padding = 1
+
+format-muted-padding = 1
+label-muted = %{T3}ﱝ%{T-}
+label-muted-foreground = ${colors.audio-off}
+label-muted-padding = 1
+
+ramp-volume-0 = %{T3}奄%{T-}
+ramp-volume-1 = %{T3}奔%{T-}
+ramp-volume-2 = %{T3}%{T-}
+ramp-volume-foreground = ${colors.audio-on}
+
+[module/session]
+type = custom/script
+
+click-left = obsession-logout -p ""
+exec = echo %{T3} 襤 %{T-}
+format-background = ${colors.background}
+format-foreground = ${colors.foreground}
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 65
+
+format = <label>
+format-padding = 1
+format-warn = <label-warn>
+format-warn-padding = 1
+label = %temperature-c%
+label-foreground = ${colors.foreground}
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.danger}
+
+ramp-0 = %{T3}%{T-}
+ramp-1 = %{T3}%{T-}
+ramp-2 = %{T3}%{T-}
+ramp-0-foreground = ${colors.foreground}
+ramp-1-foreground = ${colors.foreground}
+ramp-2-foreground = ${colors.danger}
+
+[module/title]
+type = internal/xwindow
+
+format = <label>
+format-foreground = ${colors.foreground}
+format-padding = 1
+label = %title%
+label-maxlen = 25
+
+[module/window]
+type = custom/script
+
+click-left = rofi -show window
+exec = echo %{T3}%{T-}
+format-foreground = ${colors.window}
+format-padding = 1
+
+[module/wlan]
+type = internal/network
+interface = wlp0s20f3
+interval = 1.0
+
+format-connected = <ramp-signal> <label-connected>
+format-connected-padding = 1
+;format-connected-prefix = %{T3}直%{T-}
+;format-connected-prefix-foreground = ${colors.medium}
+label-connected = "  %downspeed%"
+label-connected-foreground = ${colors.medium}
+
+format-disconnected = <label-disconnected>
+format-disconnected-padding = 1
+;format-disconnected-prefix = %{T3}睊%{T-}
+label-disconnected = %{T3}睊%{T-}
+label-disconnected-foreground = ${colors.low}
+
+ramp-signal-0 = %{T3}直%{T-}
+ramp-signal-foreground = ${colors.medium}
+
+[module/xworkspaces]
+type = internal/xworkspaces
+
+icon-0 = 1;
+icon-1 = 2;
+icon-2 = 3;
+icon-3 = 4;
+icon-4 = 5;
+icon-5 = 6;
+icon-6 = 7;
+icon-7 = 8;
+icon-8 = 9;
+icon-default = 
+
+format = <label-state>
+format-padding = 1
+
+label-active = %{T4}%icon%%{T-}
+label-active-foreground = ${colors.launcher}
+label-active-padding = 1
+
+label-occupied = %{T4}%icon%%{T-}
+label-occupied-foreground = ${colors.high}
+label-occupied-padding = 1
+
+label-urgent = %{T4}%icon%%{T-}
+label-urgent-foreground = ${colors.danger}
+label-urgent-padding = 1
+
+label-empty = %{T4}%icon%%{T-}
+label-empty-foreground = ${colors.empty}
+label-empty-padding = 1
+
+[module/firefox]
+type = custom/script
+
+click-left = firefox --browser&
+click-middle = killall firefox&
+click-right = firefox --private-window&
+exec = echo %{T4}%{T-}
+format-foreground = ${colors.firefox}
+format-padding = 1
+
+[module/google-chrome]
+type = custom/script
+
+click-left = /usr/bin/google-chrome-stable --password-store=gnome --new-window&
+click-middle = killall chrome&
+click-right = google-chrome --incognito&
+exec = echo %{T4}%{T-}
+format-foreground = ${colors.google-chrome}
+format-padding = 1
+
+[module/terminal]
+type = custom/script
+
+click-left = x-terminal-emulator
+exec = echo %{T4}%{T-}
+format-foreground = ${colors.terminal}
+format-padding = 1
+
+[module/keyboard]
+type = internal/xkeyboard
+
+blacklist-0 = num lock
+blacklist-1 = scroll lock
+
+format = <label-layout> <label-indicator>
+format-background = ${colors.background}
+format-foreground = ${colors.foreground}
+
+label-layout = %layout%
+label-indicator = %name%
+label-indicator-foreground = ${colors.foreground}
+
+[module/separator]
+type = custom/text
+
+content = |
+content-background = ${colors.background}
+content-foreground = ${colors.foreground}
+content-padding = 0.5
+
+[settings]
+screenchange-reload = true
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+; vim:ft=dosini
