@@ -7,7 +7,7 @@ Configuration files used to apply the [Gruvbox](https://github.com/morhetz/gruvb
   <br><br>
 </p>
 
-To install, just copy the files to the `~/.config` folder, with the exception of the `pscircle` file.  For `pscircle` download installation files from [here](https://github.com/tuxarch/pscircle) and replace the file `config.h.meson` with this one and follow the installation instructions as normal.
+To install, just copy the files to the `~/.config` folder, with the exception of the `pscircle` file.  For `pscircle` download installation files from [here](https://gitlab.com/mildlyparallel/pscircle) and replace the file `config.h.meson` with this one and follow the installation instructions as normal.
 
 <p align="center">
   <img alt="screenshot" src="https://github.com/alembcke/DotFiles/blob/main/media/pscircle.png">
